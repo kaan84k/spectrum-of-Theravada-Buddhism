@@ -106,11 +106,47 @@ Get-ChildItem -Recurse -Include *.html,*.md | ForEach-Object {
 Plain HTML5 · CSS custom properties (design tokens) · vanilla JavaScript ·
 Noto Serif/Sans Sinhala fonts. No dependencies, no build tooling.
 
+## 📚 Source
+
+The Sinhala texts in this collection are sourced from the Venerable author's
+works as published on **[tipitaka.lk](https://tipitaka.lk/library/462)** —
+*Rērukānē Candavimala Mahā Nāyaka Thera's library* on the Tipiṭaka.lk digital
+library. This project re-presents that material as a self-contained, offline-
+capable reading site; all gratitude and credit for the original digitisation
+goes to tipitaka.lk and its contributors.
+
+- Reference / source library: <https://tipitaka.lk/library/462>
+
+## 🤝 Contributing
+
+Contributions are welcome — corrections to the Sinhala text, new book pages,
+accessibility and mobile fixes, or roadmap items from
+[`MODERNIZATION-IDEAS.md`](MODERNIZATION-IDEAS.md).
+
+**Repository:** <https://github.com/kaan84k/spectrum-of-Theravada-Buddhism>
+
+How to contribute:
+
+1. **Fork** the repository and clone your fork.
+2. Create a branch: `git checkout -b fix/short-description`.
+3. Make your change. Please keep in mind:
+   - Every `.html` / `.md` file **must stay UTF-8 (no BOM)** — see the encoding note above.
+   - Follow [`STYLE-GUIDE.md`](STYLE-GUIDE.md) for on-screen styling.
+   - Keep the site **static** — no build step, no frameworks; vanilla HTML/CSS/JS only.
+   - When adding a book, also add its metadata to `assets/js/books-data.js` so it
+     appears in search, filters, and previous/next navigation.
+4. Verify the page opens correctly in a browser (and that Sinhala renders properly).
+5. **Commit, push** to your fork, and open a **Pull Request** describing the change.
+
+Found a problem but don't want to send a PR? Please
+[open an issue](https://github.com/kaan84k/spectrum-of-Theravada-Buddhism/issues).
+
 ## 🙏 Credits & license
 
 The Dhamma texts are the work of the Most Venerable **Rērukānē Candavimala Mahā
 Nāyaka Thera**, presented here for free distribution as **Dhamma dāna** — for the
-benefit and study of all. Please preserve attribution when sharing.
+benefit and study of all. Please preserve attribution (to the author and to
+[tipitaka.lk](https://tipitaka.lk/library/462)) when sharing.
 
 The site code (HTML/CSS/JS scaffolding under `assets/` and the page templates) is
 free to reuse and adapt.
