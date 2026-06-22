@@ -47,18 +47,46 @@
         return FACET_KEYS.every(function (f) { return matchesFacet(book, f); });
     }
 
+    /* ---- reading progress (shared with reader.js via localStorage) -- */
+    /* reader.js stores per-book keys "reader-pos:<file>" (auto) and
+       "reader-mark:<file>" (manual). We surface them here as a "continue
+       reading" hint so a started book is easy to pick back up. */
+    function readingState(b) {
+        if (!b.url) return null;
+        var file = b.url.split('/').pop();
+        function get(k) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : null; } catch (e) { return null; } }
+        var mark = get('reader-mark:' + file), pos = get('reader-pos:' + file), t = mark || pos;
+        if (!t || typeof t.progress !== 'number') return null;
+        var p = Math.max(0, Math.min(100, Math.round(t.progress)));
+        if (p < 2 || p > 99) return null;           // not meaningfully started, or finished
+        return { progress: p, hasMark: !!mark };
+    }
+
     /* ---- card + panel rendering ------------------------------------ */
     function cardHTML(b) {
         var soon = !b.available;
-        var read = soon
-            ? '<span class="card-read is-soon">ඉදිරියේදී</span>'
-            : '<a class="card-read" href="' + esc(b.url) + '">කියවන්න</a>';
+        var rs = soon ? null : readingState(b);
+        var read;
+        if (soon) {
+            read = '<span class="card-read is-soon">ඉදිරියේදී</span>';
+        } else {
+            var href = esc(b.url) + (rs ? '#resume' : '');
+            read = '<a class="card-read' + (rs ? ' is-resume' : '') + '" href="' + href + '">' +
+                (rs ? 'දිගටම කියවන්න' : 'කියවන්න') + '</a>';
+        }
+        var progress = rs
+            ? '<div class="card-progress" aria-label="කියවූ ප්‍රමාණය ' + rs.progress + '%">' +
+                '<span class="card-progress-track"><span class="card-progress-fill" style="width:' + rs.progress + '%"></span></span>' +
+                '<span class="card-progress-num">' + (rs.hasMark ? '🔖 ' : '') + rs.progress + '%</span>' +
+              '</div>'
+            : '';
         return '' +
             '<article class="card' + (soon ? ' card-soon' : '') + '">' +
                 '<span class="card-tag' + (soon ? ' tag-soon' : '') + '">' + esc(b.tag) + '</span>' +
                 '<h3 class="card-title">' + esc(b.number) + '. ' + esc(b.title) + '</h3>' +
                 '<p class="card-topic">' + esc(b.topic) + '</p>' +
                 '<p class="card-desc">' + esc(b.desc) + '</p>' +
+                progress +
                 read +
             '</article>';
     }
