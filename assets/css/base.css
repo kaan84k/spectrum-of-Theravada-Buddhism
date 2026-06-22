@@ -1,0 +1,82 @@
+/* =====================================================================
+   base.css — Shared design system
+   Resets, fonts, design tokens (CSS custom properties), dark mode,
+   and the shared "paper" body baseline.
+   Loaded by every page (books + home).
+   ===================================================================== */
+
+/* Sinhala reading fonts (graceful fallback to system fonts when offline) */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Serif+Sinhala:wght@400;500;600;700&family=Noto+Sans+Sinhala:wght@400;500;600;700&display=swap');
+
+/* ---- Design tokens ---- */
+:root {
+    --bg: #f5f1e8;
+    --page: #fbf8f1;
+    --ink: #2b2620;
+    --ink-soft: #5b5346;
+    --accent: #8a5a2b;
+    --accent-soft: #b08442;
+    --rule: #e3dac6;
+    --gatha-bg: #f3ead6;
+    --shadow: rgba(60, 45, 20, 0.12);
+    --serif: "Noto Serif Sinhala", "Iskoola Pota", "Nirmala UI", "Noto Sans Sinhala", serif;
+    --sans: "Noto Sans Sinhala", "Nirmala UI", "Iskoola Pota", sans-serif;
+}
+
+/* Dark palette. Applied either when the system prefers dark (unless the
+   reader has explicitly forced light), or when the reader forces dark via
+   the data-theme attribute set by reader.js. The token block is repeated
+   for the two selectors because a media query and a plain rule can't be
+   merged in plain CSS. */
+@media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+        --bg: #1a1815;
+        --page: #232019;
+        --ink: #e8e1d2;
+        --ink-soft: #b3a98f;
+        --accent: #d6a35f;
+        --accent-soft: #c8995a;
+        --rule: #3a342a;
+        --gatha-bg: #2c2719;
+        --shadow: rgba(0, 0, 0, 0.4);
+    }
+}
+:root[data-theme="dark"] {
+    --bg: #1a1815;
+    --page: #232019;
+    --ink: #e8e1d2;
+    --ink-soft: #b3a98f;
+    --accent: #d6a35f;
+    --accent-soft: #c8995a;
+    --rule: #3a342a;
+    --gatha-bg: #2c2719;
+    --shadow: rgba(0, 0, 0, 0.4);
+}
+
+/* ---- Reset ---- */
+* { box-sizing: border-box; }
+
+html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+    background: var(--bg);
+}
+
+/* ---- Shared "paper" body baseline ----
+   A centered reading column laid out as a page. Individual pages
+   (reader.css / home.css) tune max-width, font-size and spacing. */
+body {
+    max-width: 46rem;
+    margin: 0 auto;
+    padding: clamp(1.5rem, 4vw, 3.5rem) clamp(1.1rem, 5vw, 3.5rem);
+    background: var(--page);
+    box-shadow: 0 0 28px var(--shadow);
+    color: var(--ink);
+    font-family: var(--serif);
+    font-size: 1.18rem;
+    line-height: 1.95;
+    font-feature-settings: "kern" 1, "liga" 1;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    overflow-wrap: break-word; /* long Sinhala tokens never force horizontal scroll */
+}

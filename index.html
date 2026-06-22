@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="si">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>ථෙරවාද බුද්ධ ධර්ම පුස්තකාලය</title>
+    <link rel="stylesheet" href="assets/css/base.css">
+    <link rel="stylesheet" href="assets/css/home.css">
+</head>
+<body id="top">
+
+    <!-- Sticky top bar -->
+    <nav class="topbar">
+        <a class="brand" href="#top">ථෙරවාද බුද්ධ ධර්ම පුස්තකාලය</a>
+        <div class="topbar-nav">
+            <a href="#phase-1">මූලික</a>
+            <a href="#phase-2">ධර්ම</a>
+            <a href="#phase-3">විනය</a>
+            <a href="#phase-4">භාවනා</a>
+            <a href="#phase-5">අභිධර්ම</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <header class="hero">
+        <p class="hero-eyebrow">ථෙරවාද බුද්ධ ධර්ම පුස්තකාලය</p>
+        <h1>පූජ්‍ය රේරුකානේ චන්දවිමල මහා නාහිමියන්ගේ ග්‍රන්ථ පරිශීලන මාර්ගෝපදේශය</h1>
+        <p class="hero-lede">
+            අතිපූජ්‍ය රේරුකානේ චන්දවිමල මහා නායක ස්වාමීන්ද්‍රයන් වහන්සේ විසින් රචිත දහම් පොත් වහන්සේලා, සරල ගිහි චාරිත්‍රවල සිට අතිශය ගැඹුරු අභිධර්ම විග්‍රහයන් දක්වා සමස්ත ථෙරවාදී බුද්ධ ධර්මයම ආවරණය කරයි. මෙම අගනා දහම් දැනුම ක්‍රමවත්ව සහ පහසුවෙන් අවබෝධ කරගැනීම සඳහා, ඔබගේ කියවීමේ රුචිකත්වය අනුව ග්‍රන්ථ පෙළගැස්ම පියවර 5ක් යටතේ මෙසේ වර්ගීකරණය කර ඇත.
+        </p>
+        <div class="hero-stats">
+            <div class="hero-stat"><b>5</b><span>කියවීමේ පියවර</span></div>
+            <div class="hero-stat"><b>17</b><span>ග්‍රන්ථ දැන් කියවිය හැකි</span></div>
+            <div class="hero-stat"><b>3</b><span>ඉදිරියේදී</span></div>
+        </div>
+    </header>
+
+    <!-- Search + filters (powered by library.js) -->
+    <section class="toolbar" aria-label="ග්‍රන්ථ සෙවීම සහ පෙරහන">
+        <div class="search-row">
+            <input type="search" id="book-search" class="search-input"
+                   placeholder="ග්‍රන්ථ සොයන්න... (නම, විෂය, විස්තරය)"
+                   autocomplete="off" aria-label="ග්‍රන්ථ සොයන්න">
+            <span id="result-count" class="result-count" aria-live="polite"></span>
+            <button type="button" id="clear-filters" class="clear-btn" hidden>පෙරහන් ඉවත් කරන්න ✕</button>
+        </div>
+        <div id="filters" class="filters"></div>
+    </section>
+
+    <!-- Book list: rendered from assets/js/books-data.js -->
+    <main id="library"></main>
+    <p id="no-results" class="no-results" hidden>ඔබගේ සෙවීමට ගැළපෙන ග්‍රන්ථ හමු නොවීය. පෙරහන් ඉවත් කර නැවත උත්සාහ කරන්න.</p>
+
+    <!-- Fallback when JavaScript is disabled -->
+    <noscript>
+        <p class="noscript-note">සෙවුම් සහ පෙරහන් භාවිතයට JavaScript අවශ්‍යයි. පහත සෘජු සබැඳි ඔස්සේ ග්‍රන්ථ වෙත පිවිසෙන්න:</p>
+        <ul class="noscript-list">
+            <li><a href="1-The-Basics/Punyopadeshaya.html">පුණ්‍යෝපදේශය</a></li>
+            <li><a href="1-The-Basics/Baudhdhayage-Athpotha.html">බෞද්ධයාගේ අත්පොත</a></li>
+            <li><a href="1-The-Basics/Pohoya-Dinaya.html">පෝය දිනය</a></li>
+            <li><a href="1-The-Basics/Suwisi-Maha-Gunaya.html">සූවිසි මහා ගුණය</a></li>
+            <li><a href="2-Foundational-Philosophy/Chathurarya-Sathyaya.html">චතුරාර්ය සත්‍යය</a></li>
+            <li><a href="2-Foundational-Philosophy/Dharma-Vinishchaya.html">ධර්ම විනිශ්චය</a></li>
+            <li><a href="2-Foundational-Philosophy/Wanchaka-Dharma-saha-Chiththopaklesha-Dharma.html">වඤ්චක ධර්ම හා චිත්තෝපක්ලේශ ධර්ම</a></li>
+            <li><a href="2-Foundational-Philosophy/Paramitha-Prakaranaya.html">පාරමිතා ප්‍රකරණය</a></li>
+            <li><a href="3-Monastic-Discipline/Shasanavatharanaya.html">ශාසනාවතරණය</a></li>
+            <li><a href="3-Monastic-Discipline/Ubhaya-Prathimokshaya.html">උභය ප්‍රාතිමෝක්ෂය</a></li>
+            <li><a href="4-Meditation-Bhavana/Sathipatthana-Bhavana-Kramaya.html">සතිපට්ඨාන භාවනා ක්‍රමය</a></li>
+            <li><a href="4-Meditation-Bhavana/Vidarshana-Bhavana-Kramaya.html">විදර්ශනා භාවනා ක්‍රමය</a></li>
+            <li><a href="4-Meditation-Bhavana/Chaththaleesakara-Maha-Vipassana-Bhavana.html">චත්තාලීසාකාර මහා විපස්සනා භාවනාව</a></li>
+            <li><a href="5-Abhidhamma/Abhidharmaye-Mulika-Karuna.html">අභිධර්මයේ මූලික කරුණු</a></li>
+            <li><a href="5-Abhidhamma/Abhidharma-Margaya.html">අභිධර්ම මාර්ගය</a></li>
+            <li><a href="5-Abhidhamma/Patichcha-Samuppada-Vivaranaya.html">පටිච්ච සමුප්පාද විවරණය</a></li>
+            <li><a href="5-Abhidhamma/Nirvana-Vinishchaya.html">නිර්වාණ විනිශ්චය</a></li>
+        </ul>
+    </noscript>
+
+    <footer>
+        <p>අතිපූජ්‍ය <span class="footer-name">රේරුකානේ චන්දවිමල මහා නායක ස්වාමීන්ද්‍රයන් වහන්සේ</span>ගේ ග්‍රන්ථ නාමාවලිය</p>
+        <p>සියලු දෙනාටම නිවන් සුව සැලසේවා! 🙏</p>
+    </footer>
+
+    <script src="assets/js/books-data.js"></script>
+    <script src="assets/js/library.js"></script>
+
+</body>
+</html>

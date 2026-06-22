@@ -1,0 +1,444 @@
+/* =====================================================================
+   home.css — Index / landing page: a calm digital library
+   Sticky top bar, hero, scannable phase panels, and book cards.
+   Pairs with base.css (design tokens + Sinhala fonts).
+   ===================================================================== */
+
+/* Home is a wide canvas of cards, not a single paper sheet, so it
+   overrides the shared "paper" body baseline from base.css. */
+body {
+    max-width: 64rem;
+    background: var(--bg);
+    box-shadow: none;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    padding: 0 clamp(1rem, 4vw, 2.2rem) clamp(2.5rem, 6vw, 4rem);
+}
+
+/* ---------------------------------------------------------------------
+   Sticky top bar
+   Bleeds to the body's padding edges so its underline spans full width
+   while its contents stay aligned with the page column.
+   --------------------------------------------------------------------- */
+.topbar {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.4rem 1rem;
+    margin: 0 calc(-1 * clamp(1rem, 4vw, 2.2rem));
+    padding: 0.7rem clamp(1rem, 4vw, 2.2rem);
+    background: var(--page);
+    border-bottom: 1px solid var(--rule);
+}
+.brand {
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1.02rem;
+    color: var(--accent);
+    text-decoration: none;
+    white-space: nowrap;
+}
+.topbar-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem;
+}
+.topbar-nav a {
+    font-family: var(--sans);
+    font-size: 0.9rem;
+    color: var(--ink-soft);
+    text-decoration: none;
+    padding: 0.3rem 0.72rem;
+    border-radius: 999px;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.topbar-nav a:hover,
+.topbar-nav a:focus-visible {
+    background: var(--gatha-bg);
+    color: var(--accent);
+}
+
+/* ---------------------------------------------------------------------
+   Hero
+   --------------------------------------------------------------------- */
+.hero {
+    text-align: center;
+    padding: clamp(2.2rem, 6vw, 3.8rem) 0 clamp(1.6rem, 4vw, 2.6rem);
+    border-bottom: 1px solid var(--rule);
+    margin-bottom: clamp(2rem, 5vw, 3rem);
+}
+.hero-eyebrow {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
+    color: var(--accent-soft);
+    margin: 0 0 0.9rem;
+}
+.hero h1 {
+    font-family: var(--sans);
+    color: var(--accent);
+    font-size: clamp(1.5rem, 4.5vw, 2.45rem);
+    line-height: 1.3;
+    margin: 0 auto 1.1rem;
+    max-width: 26ch;
+    overflow-wrap: break-word;
+}
+.hero-lede {
+    font-family: var(--serif);
+    color: var(--ink-soft);
+    font-size: 1.05rem;
+    line-height: 1.85;
+    text-align: justify;
+    max-width: 56ch;
+    margin: 0 auto;
+}
+.hero-stats {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.8rem 2.2rem;
+    margin-top: clamp(1.5rem, 4vw, 2.2rem);
+}
+.hero-stat {
+    font-family: var(--sans);
+    line-height: 1.2;
+}
+.hero-stat b {
+    display: block;
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--accent);
+}
+.hero-stat span {
+    font-size: 0.8rem;
+    color: var(--ink-soft);
+}
+
+/* ---------------------------------------------------------------------
+   Search + filter toolbar
+   --------------------------------------------------------------------- */
+.toolbar {
+    margin-bottom: clamp(1.8rem, 4vw, 2.6rem);
+}
+.search-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.6rem 0.9rem;
+    margin-bottom: 1rem;
+}
+.search-input {
+    flex: 1 1 16rem;
+    min-width: 0;
+    font-family: var(--serif);
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--page);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.6rem 1.1rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+.search-input::placeholder { color: var(--ink-soft); opacity: 0.8; }
+.search-input:focus-visible {
+    outline: none;
+    border-color: var(--accent-soft);
+    box-shadow: 0 0 0 3px var(--gatha-bg);
+}
+.result-count {
+    font-family: var(--sans);
+    font-size: 0.88rem;
+    color: var(--ink-soft);
+    white-space: nowrap;
+}
+.clear-btn {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--accent-soft);
+    border-radius: 999px;
+    padding: 0.4rem 0.9rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease;
+}
+.clear-btn:hover { background: var(--gatha-bg); }
+
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+.filter-group {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.45rem 0.6rem;
+}
+.filter-group-label {
+    flex: none;
+    min-width: 5.5rem;
+    font-family: var(--sans);
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--ink-soft);
+}
+.chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+}
+.chip {
+    font-family: var(--sans);
+    font-size: 0.84rem;
+    color: var(--ink-soft);
+    background: var(--page);
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    padding: 0.28rem 0.78rem;
+    cursor: pointer;
+    transition: background 0.15s ease, color 0.15s ease, border-color 0.15s ease;
+}
+.chip:hover {
+    border-color: var(--accent-soft);
+    color: var(--accent);
+}
+.chip[aria-pressed="true"] {
+    color: var(--page);
+    background: var(--accent);
+    border-color: var(--accent);
+}
+.chip:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 3px var(--gatha-bg);
+}
+
+/* Dim a top-bar quick link when its stage has no current matches */
+.topbar-nav a.is-empty {
+    opacity: 0.4;
+    pointer-events: none;
+}
+
+/* Empty-result + no-script messages */
+.no-results,
+.noscript-note {
+    text-align: center;
+    font-family: var(--sans);
+    color: var(--ink-soft);
+    padding: 2.5rem 1rem;
+}
+.noscript-list {
+    max-width: 32rem;
+    margin: 0 auto 2rem;
+    line-height: 2;
+}
+.noscript-list a { color: var(--accent); }
+
+/* ---------------------------------------------------------------------
+   Phase section panels
+   --------------------------------------------------------------------- */
+.phase {
+    margin: 0 0 clamp(2.4rem, 5vw, 3.4rem);
+    scroll-margin-top: 4.5rem; /* clears the sticky top bar on anchor jump */
+}
+.phase-head {
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    margin-bottom: 0.5rem;
+}
+.phase-num {
+    flex: none;
+    width: 2.5rem;
+    height: 2.5rem;
+    display: grid;
+    place-items: center;
+    font-family: var(--sans);
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: var(--page);
+    background: var(--accent);
+    border-radius: 50%;
+}
+.phase-title {
+    font-family: var(--sans);
+    color: var(--accent);
+    font-size: clamp(1.25rem, 3.5vw, 1.6rem);
+    line-height: 1.25;
+    margin: 0;
+    overflow-wrap: break-word;
+}
+.phase-sub {
+    font-family: var(--sans);
+    font-size: 0.85rem;
+    color: var(--ink-soft);
+    margin: 0.15rem 0 0;
+}
+.phase-lede {
+    color: var(--ink-soft);
+    max-width: 62ch;
+    margin: 0 0 1.4rem;
+}
+
+/* ---------------------------------------------------------------------
+   Book cards — responsive grid (multi-column desktop, single mobile)
+   --------------------------------------------------------------------- */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 17.5rem), 1fr));
+    gap: clamp(0.9rem, 2vw, 1.3rem);
+}
+.card {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--page);
+    border: 1px solid var(--rule);
+    border-radius: 10px;
+    padding: 1.15rem 1.2rem 1.05rem;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+.card:not(.card-soon):hover {
+    border-color: var(--accent-soft);
+    box-shadow: 0 6px 18px var(--shadow);
+    transform: translateY(-3px);
+}
+.card-tag {
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-size: 0.74rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--gatha-bg);
+    border: 1px solid var(--accent-soft);
+    padding: 0.12rem 0.62rem;
+    border-radius: 999px;
+    margin-bottom: 0.75rem;
+}
+.card-tag.tag-soon {
+    color: var(--page);
+    background: var(--accent-soft);
+    border-color: var(--accent-soft);
+}
+.card-title {
+    font-family: var(--sans);
+    font-size: 1.12rem;
+    line-height: 1.35;
+    color: var(--ink);
+    margin: 0 0 0.25rem;
+    transition: color 0.15s ease;
+    overflow-wrap: break-word;
+}
+.card:not(.card-soon):hover .card-title { color: var(--accent); }
+.card-topic {
+    font-family: var(--sans);
+    font-style: italic;
+    font-size: 0.82rem;
+    color: var(--ink-soft);
+    margin: 0 0 0.65rem;
+}
+.card-desc {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    color: var(--ink);
+    text-align: justify;
+    margin: 0 0 1.1rem;
+}
+.card-read {
+    margin-top: auto;
+    align-self: flex-start;
+    font-family: var(--sans);
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: var(--accent);
+    text-decoration: none;
+}
+.card-read::after { content: " →"; }
+/* Stretched link: the whole available card is clickable while the
+   "Read" label stays as the clear visible affordance. */
+a.card-read::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+}
+
+/* Coming-soon cards: quiet, non-clickable */
+.card-soon {
+    opacity: 0.72;
+    border-style: dashed;
+}
+.card-read.is-soon {
+    color: var(--ink-soft);
+    cursor: default;
+}
+.card-read.is-soon::after { content: ""; }
+
+/* ---------------------------------------------------------------------
+   Footer
+   --------------------------------------------------------------------- */
+footer {
+    text-align: center;
+    margin-top: clamp(2rem, 5vw, 3rem);
+    padding-top: 1.6rem;
+    border-top: 1px solid var(--rule);
+    color: var(--ink-soft);
+    font-size: 0.95rem;
+}
+.footer-name { color: var(--accent); font-weight: 700; }
+
+/* ---------------------------------------------------------------------
+   Responsive + accessibility + print
+   --------------------------------------------------------------------- */
+
+/* Touch sizing: phones + tablets. Keep interactive controls at least
+   44px tall and let the filter rows wrap cleanly (label above chips). */
+@media (max-width: 768px) {
+    .topbar-nav a,
+    .brand,
+    .chip,
+    .clear-btn {
+        min-height: 44px;
+        display: inline-flex;
+        align-items: center;
+    }
+    .search-input { min-height: 44px; }
+
+    .filter-group {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.4rem;
+    }
+    .filter-group-label { min-width: 0; }
+    .chips { gap: 0.5rem; }
+}
+
+/* Narrow phones: drop justified text so the ragged edge stays readable. */
+@media (max-width: 480px) {
+    .hero-lede,
+    .card-desc { text-align: left; }
+    .hero-stats { gap: 0.8rem 1.4rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .card,
+    .card-title { transition: none; }
+    .card:not(.card-soon):hover { transform: none; }
+    html { scroll-behavior: auto; }
+}
+
+@media print {
+    .topbar { display: none; }
+    body { background: #fff; color: #000; max-width: none; }
+    .card {
+        break-inside: avoid;
+        border-color: #ccc;
+        box-shadow: none;
+    }
+    .card-read { display: none; }
+}

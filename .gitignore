@@ -1,0 +1,18 @@
+# Local tooling / agent session data (not part of the site)
+.claude/
+.agents/
+
+# OS junk
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Logs / temp
+*.log
+*.tmp
