@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://kaan84k.github.io/spectrum-of-Theravada-Buddhism/sitemap.xml
