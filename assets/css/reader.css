@@ -500,6 +500,182 @@ a.book-nav-link:hover {
 @media (prefers-reduced-motion: reduce) {
     #reading-progress span { transition: none; }
     a.book-nav-link:hover { transform: none; }
+    .ss-spin { animation: none; }
+}
+
+/* =====================================================================
+   On-demand section summaries (summarize.js) — ✨ button, summary card,
+   key dialog. Progressive enhancement; absent when JS/Gemini unavailable.
+   ===================================================================== */
+
+/* ---- per-heading "✨ සාරාංශය" button ---- */
+.sum-btn {
+    margin-inline-start: 0.6em;
+    vertical-align: middle;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3em;
+    padding: 0.15em 0.6em;
+    font-family: var(--sans);
+    font-size: 0.6em;          /* relative to the heading size */
+    font-weight: 600;
+    line-height: 1.4;
+    color: var(--accent);
+    background: transparent;
+    border: 1px solid var(--rule);
+    border-radius: 999px;
+    cursor: pointer;
+    opacity: 0.55;
+    transition: opacity 0.15s, background 0.15s, border-color 0.15s;
+}
+.sum-btn:hover,
+.sum-btn:focus-visible {
+    opacity: 1;
+    background: var(--gatha-bg);
+    border-color: var(--accent-soft);
+}
+.sum-btn .sum-ico { font-size: 0.95em; }
+@media (max-width: 600px) { .sum-btn .sum-lbl { display: none; } }
+
+/* ---- the inline summary card ---- */
+.section-summary {
+    margin: 0.6rem 0 1.2rem;
+    padding: 0.7rem 0.95rem;
+    background: var(--gatha-bg);
+    border: 1px solid var(--rule);
+    border-inline-start: 3px solid var(--accent-soft);
+    border-radius: 8px;
+    font-family: var(--sans);
+}
+.section-summary.is-error { border-inline-start-color: #c0532b; }
+.section-summary .ss-head {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    margin-bottom: 0.4rem;
+}
+.section-summary .ss-title {
+    font-weight: 700;
+    font-size: 0.95rem;
+    color: var(--accent);
+}
+.section-summary .ss-ai {
+    font-size: 0.65rem;
+    letter-spacing: 0.06em;
+    padding: 0.05em 0.4em;
+    border: 1px solid currentColor;
+    border-radius: 5px;
+    color: var(--ink-soft);
+    opacity: 0.8;
+}
+.section-summary .ss-x {
+    margin-inline-start: auto;
+    border: none;
+    background: transparent;
+    color: var(--ink-soft);
+    font-size: 0.9rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0.2em 0.3em;
+}
+.section-summary .ss-x:hover { color: var(--ink); }
+.section-summary .ss-body {
+    color: var(--ink);
+    line-height: 1.7;
+    white-space: pre-wrap;
+}
+.section-summary .ss-loading {
+    display: flex;
+    align-items: center;
+    gap: 0.5em;
+    color: var(--ink-soft);
+}
+.section-summary .ss-spin {
+    width: 0.9em;
+    height: 0.9em;
+    border: 2px solid var(--rule);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: ss-spin 0.7s linear infinite;
+}
+@keyframes ss-spin { to { transform: rotate(360deg); } }
+
+/* ---- BYOK key dialog ---- */
+#gemini-key-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    background: rgba(0, 0, 0, 0.45);
+}
+#gemini-key-modal .gk-box {
+    width: 100%;
+    max-width: 26rem;
+    background: var(--page);
+    color: var(--ink);
+    border: 1px solid var(--rule);
+    border-radius: 12px;
+    box-shadow: 0 12px 40px var(--shadow);
+    padding: 1.2rem 1.3rem;
+    font-family: var(--sans);
+}
+#gemini-key-modal .gk-title {
+    margin: 0 0 0.5rem;
+    font-size: 1.15rem;
+    color: var(--accent);
+}
+#gemini-key-modal .gk-note {
+    margin: 0 0 0.8rem;
+    font-size: 0.9rem;
+    line-height: 1.6;
+    color: var(--ink-soft);
+}
+#gemini-key-modal .gk-input {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 0.6em 0.7em;
+    font-size: 1rem;
+    color: var(--ink);
+    background: var(--bg);
+    border: 1px solid var(--rule);
+    border-radius: 8px;
+}
+#gemini-key-modal .gk-input:focus-visible {
+    outline: 2px solid var(--accent-soft);
+    outline-offset: 1px;
+}
+#gemini-key-modal .gk-get {
+    margin: 0.6rem 0 0;
+    font-size: 0.85rem;
+}
+#gemini-key-modal .gk-get a { color: var(--accent); }
+#gemini-key-modal .gk-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    margin-top: 1rem;
+}
+#gemini-key-modal .gk-actions button {
+    font-family: var(--sans);
+    font-size: 0.95rem;
+    padding: 0.5em 1.1em;
+    border-radius: 8px;
+    cursor: pointer;
+    border: 1px solid var(--rule);
+}
+#gemini-key-modal .gk-cancel { background: transparent; color: var(--ink-soft); }
+#gemini-key-modal .gk-save {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+}
+
+@media (max-width: 768px) {
+    .sum-btn { min-height: 36px; }
+    #gemini-key-modal .gk-actions button { min-height: 44px; }
 }
 
 /* ---- Print ---- */
@@ -510,6 +686,9 @@ a.book-nav-link:hover {
     #bookmark-ctl,
     #resume-bar,
     #reader-toast,
+    .sum-btn,
+    .section-summary,
+    #gemini-key-modal,
     .book-nav { display: none; }
     .TOC-container.is-collapsed { display: block; }
     body { background: #fff; color: #000; font-size: 12pt; box-shadow: none; max-width: none; }
